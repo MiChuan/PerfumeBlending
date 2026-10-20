@@ -34,6 +34,23 @@
 
 3. 访问 `http://localhost:8000` 即可。
 
+## 🌐 在线访问
+
+项目已通过 GitHub Pages 部署，可直接访问：
+
+**https://michuan.github.io/PerfumeBlending/**
+
+## 🚢 GitHub Pages 部署
+
+本项目为纯静态站点，零构建即可部署。
+
+1. 打开仓库页面 → **Settings** → **Pages**；
+2. 在 **Build and deployment** 中，**Source** 选择 **Deploy from a branch**；
+3. **Branch** 选择 `main`，目录选 **`/ (root)`**，点击保存；
+4. 等待几分钟，即可通过 `https://<用户名>.github.io/PerfumeBlending/` 访问。
+
+> 由于站点入口为根目录的 `index.html`，无需额外构建步骤，GitHub Actions 会自动完成发布。
+
 ## 📁 目录结构
 
 ```
