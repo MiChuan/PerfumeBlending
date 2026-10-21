@@ -53,20 +53,35 @@ npx serve .                     # Node.js
 
 ## 🌐 GitHub Pages 部署
 
-仓库根目录已有 `index.html`，因此**无需任何构建流水线**，一次配置即可上线：
+本项目使用 **GitHub Actions** 自动部署：仓库内置流水线 [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)，使用官方的 `actions/configure-pages` + `actions/deploy-pages`，无需自行编写构建脚本。
+
+首次启用只需两步：
 
 1. 打开仓库 → **Settings**（设置）→ 左侧 **Pages**；
-2. **Build and deployment** → **Source** 选择 **`Deploy from a branch`**；
-3. **Branch** 选择 **`main`**，目录选择 **`/ (root)`**，点击 **Save**；
-4. 等待约 1–2 分钟，于 `https://michuan.github.io/PerfumeBlending/` 访问即可。
+2. **Build and deployment** → **Source** 选择 **`GitHub Actions`**，保存即可。
 
-> **提示**：后续每次向 `main` 推送代码，GitHub Pages 都会自动重新构建发布，无需额外操作。
+此后每次向 `main` 推送代码，流水线会自动打包站点并发布，可在 **Actions** 标签页查看进度；也支持在 Actions 页面手动触发（`workflow_dispatch`）。部署完成后访问：
+
+**https://michuan.github.io/PerfumeBlending/**
+
+<details>
+<summary><b>流水线说明</b></summary>
+
+- **触发**：`push` 到 `main` 分支，或手动 `workflow_dispatch`；
+- **权限**：仅授予 Pages 部署所需的最小权限（`pages: write` + `id-token: write`）；
+- **并发控制**：同一时间只保留一次部署，新提交会取消进行中的旧部署；
+- **产物**：直接上传仓库根目录（`index.html` 位于根目录，无构建步骤）。
+
+</details>
 
 ## 📁 项目结构
 
 ```
 PerfumeBlending/
 ├── index.html                # 网站主文件（含全部样式与交互逻辑）
+├── .github/
+│   └── workflows/
+│       └── deploy.yml        # GitHub Pages 部署流水线
 ├── PerfumeFormula/           # 香方数据源
 │   ├── 十三香.md
 │   ├── 四合香.md
